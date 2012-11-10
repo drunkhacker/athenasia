@@ -18,7 +18,6 @@ exports.pushed = function(req, res) {
                 return;
             }
 
-            console.log(stdout);
         });
     	
         res.send({ok:true});
