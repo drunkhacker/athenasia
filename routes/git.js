@@ -13,10 +13,13 @@ exports.pushed = function(req, res) {
     	var exec = require('child_process').exec,
     	child;
         console.log("let's git pull");
-        child = exec("git reset --hard; git pull; sudo PORT=80 forever restart app.js", {cwd:__dirname}, function(error, stdout, stderr) {
+        child = exec("git reset --hard; git pull", {cwd:__dirname}, function(error, stdout, stderr) {
             if (error) {
                 console.log("Error : " + error);
+                return;
             }
+
+            console.log(stdout);
         });
     	
         res.send({ok:true});
