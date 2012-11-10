@@ -9,7 +9,6 @@ exports.pushed = function(req, res) {
     	res.status(400);
     	res.send({ok:false, error: "You are not from authorized ips"});
     } else {
-    	//check current commit id
     	var exec = require('child_process').exec,
     	child;
         console.log("let's git pull");
