@@ -41,7 +41,7 @@ exec("git log -l --date=iso -n1", function(err, stdout, stderr) {
 
 app.get('/', routes.index(lastDate, lastCommit));
 app.get('/users', user.list);
-app.post('/git/pushed', git.pushed;
+app.post('/git/pushed', git.pushed);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
