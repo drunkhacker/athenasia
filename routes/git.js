@@ -13,13 +13,13 @@ exports.pushed = function(req, res) {
     	var exec = require('child_process').exec,
     	child;
 
-    	child = exec('git rev-parse HEAD', {cwd: __dir}, function(error, stdout, stderr) {
+    	child = exec('git rev-parse HEAD', {cwd: __dirname}, function(error, stdout, stderr) {
     		console.log('stdout : ' + stdout);
     		var commitid = stdout.replace(/\n$/, "");
 
     		if (commitid == pushInformation.before) {
     			//fine to git pull
-    			exec("git reset --hard; git pull; sudo PORT=80 forever restart app.js", {cwd:__dir}, function(error, stdout, stderr) {
+    			exec("git reset --hard; git pull; sudo PORT=80 forever restart app.js", {cwd:__dirname}, function(error, stdout, stderr) {
     				if (error) {
     					console.log("Error : " + error);
        				}
