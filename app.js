@@ -8,7 +8,8 @@ var express = require('express')
   , user = require('./routes/user')
   , git = require('./routes/git')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , exec = require('child_process').exec;
 
 var app = express();
 
@@ -29,9 +30,18 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
+//grab the last commit
+var lastDate;
+var lastCommit;
+exec("git log -l --date=iso -n1", function(err, stdout, stderr) {
+  var arr = stdout.split("\n");
+  lastDate = arr[2].match(/Date:\s+(.*)/)[1];
+  lastCommit = arr[0].match(/commit (.*)/)[1];
+});
+
+app.get('/', routes.index(lastDate, lastCommit));
 app.get('/users', user.list);
-app.post('/git/pushed', git.pushed);
+app.post('/git/pushed', git.pushed;
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
