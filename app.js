@@ -35,9 +35,9 @@ var lastDate;
 var lastCommit;
 var c = true;
 exec("git log -l --date=iso -n1", {cwd:__dirname}, function(err, stdout, stderr) {
-  var arr = stdout.split("\n");
-  lastDate = arr[2].match(/Date:\s+(.*)/)[1];
-  lastCommit = arr[0].match(/commit (.*)/)[1];
+  var arr = stdout.match(/commit ([a-z0-9]+)[\s\S]*.*Date:\s+(.*)\n/);
+  lastDate = arr[2];
+  lastCommit = arr[1];
   console.log("lastdate = " + lastDate);
   console.log("lastcommit = " + lastCommit);
   app.get('/', routes.index(lastDate, lastCommit));
