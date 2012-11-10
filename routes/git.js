@@ -20,7 +20,7 @@ exports.pushed = function(req, res) {
     		if (commitid == pushInformation.before) {
     			//fine to git pull
                 console.log("let's git pull");
-    			exec("git reset --hard; git pull; sudo PORT=80 forever restart app.js", {cwd:__dirname}, function(error, stdout, stderr) {
+    			exec("git reset --hard; (yes | git pull) ; sudo PORT=80 forever restart app.js", {cwd:__dirname}, function(error, stdout, stderr) {
     				if (error) {
     					console.log("Error : " + error);
        				}
