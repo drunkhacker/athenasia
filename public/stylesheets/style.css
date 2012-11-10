@@ -19,6 +19,7 @@ body {
 }
 .description {
   font-size: 13pt;
+  text-align: justify;
 }
 a {
   color: #00b7ff;
@@ -29,7 +30,7 @@ a {
 }
 .usage {
   font-size: 10pt;
-  font-family: Monaco, "Lucida Console";
+  font-family: Monaco, "Lucida Console", sans-serif;
   padding: 5px;
   padding-left: 10px;
   border-radius: 10px;
@@ -46,8 +47,13 @@ a {
   padding: 3px 30px 3px 30px;
   background-color: #333;
 }
+.commitinfo {
+  font-size: 9pt;
+  font-family: Monaco, "Lucida Console", sans-serif;
+  color: #aaa;
+  text-align: right;
+}
 footer {
   font-style: italic;
   font-size: 12pt;
-  padding-left: 120px;
 }
