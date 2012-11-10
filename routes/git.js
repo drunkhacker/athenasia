@@ -1,6 +1,6 @@
 exports.pushed = function(req, res) {
 	
-	var pushInformation = req.param;
+	var pushInformation = req.param('payload');
 	var ip = req.ip;
     
     console.dir(pushInformation);
