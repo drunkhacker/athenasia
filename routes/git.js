@@ -12,25 +12,13 @@ exports.pushed = function(req, res) {
     	//check current commit id
     	var exec = require('child_process').exec,
     	child;
-
-    	child = exec('git rev-parse HEAD', {cwd: __dirname}, function(error, stdout, stderr) {
-    		console.log('stdout : ' + stdout);
-    		var commitid = stdout.replace(/\n$/, "");
-
-    		if (commitid == pushInformation.before) {
-    			//fine to git pull
-                console.log("let's git pull");
-    			exec("git reset --hard; (yes | git pull) ; sudo PORT=80 forever restart app.js", {cwd:__dirname}, function(error, stdout, stderr) {
-    				if (error) {
-    					console.log("Error : " + error);
-       				}
-    			})
-
-    		} else {
-                console.log("commit id didn't match " + commitid + ", " + pushInformation.before);
-    			//what??
-    		}
-    	});
+        console.log("let's git pull");
+        child = exec("git reset --hard; (yes | git pull) ; sudo PORT=80 forever restart app.js", {cwd:__dirname}, function(error, stdout, stderr) {
+            if (error) {
+                console.log("Error : " + error);
+            }
+        });
+    	
         res.send({ok:true});
     }
 }
