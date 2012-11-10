@@ -33,16 +33,21 @@ app.configure('development', function(){
 //grab the last commit
 var lastDate;
 var lastCommit;
-exec("git log -l --date=iso -n1", function(err, stdout, stderr) {
+var c = true;
+exec("git log -l --date=iso -n1", {cwd:__dirname}, function(err, stdout, stderr) {
   var arr = stdout.split("\n");
   lastDate = arr[2].match(/Date:\s+(.*)/)[1];
   lastCommit = arr[0].match(/commit (.*)/)[1];
+  console.log("lastdate = " + lastDate);
+  console.log("lastcommit = " + lastCommit);
+  app.get('/', routes.index(lastDate, lastCommit));
+  app.get('/users', user.list);
+  app.post('/git/pushed', git.pushed);
+  
+  http.createServer(app).listen(app.get('port'), function(){
+    console.log("Express server listening on port " + app.get('port'));
+  });
 });
 
-app.get('/', routes.index(lastDate, lastCommit));
-app.get('/users', user.list);
-app.post('/git/pushed', git.pushed);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
-});
+
