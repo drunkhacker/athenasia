@@ -3,6 +3,7 @@ exports.pushed = function(req, res) {
 	var pushInformation = req.param;
 	var ip = req.ip;
     
+    console.dir(pushInformation);
 
 	var authorized_ips = ["207.97.227.253", "50.57.128.197", "108.171.174.178"];
 
