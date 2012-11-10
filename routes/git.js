@@ -33,5 +33,6 @@ exports.pushed = function(req, res) {
     			//what??
     		}
     	});
+        res.send({ok:true});
     }
 }
